@@ -17,12 +17,10 @@ class Solution:
         layers = len(weights)
         h = x
         for i in range(layers):
+            h = h @ weights[i] + biases[i]
             if i < layers - 1:
-                h = h @ weights[i] + biases[i]
                 h = np.maximum(0, h)
-            
-            else:
-                h = h @ weights[i] + biases[i]
+    
 
         return np.round(h, 5)
 
