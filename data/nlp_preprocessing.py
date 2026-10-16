@@ -9,11 +9,11 @@ class Solution:
         # 2. Encode each sentence by replacing words with their IDs
         # 3. Combine positive + negative into one list of tensors
         # 4. Pad shorter sequences with 0s using nn.utils.rnn.pad_sequence(tensors, batch_first=True)
-        max_len_pos_sent = max(positive, key=lambda x: len(x.split()))
-        max_len_neg_sent = max(negative, key=lambda x: len(x.split()))
+        #max_len_pos_sent = max(positive, key=lambda x: len(x.split()))
+        #max_len_neg_sent = max(negative, key=lambda x: len(x.split()))
 
-        T = max(len(max_len_pos_sent), len(max_len_neg_sent))
-        N = len(positive)
+        #T = max(len(max_len_pos_sent), len(max_len_neg_sent))
+        #N = len(positive)
 
         words = {}
         for a in positive:
@@ -45,8 +45,6 @@ class Solution:
             for word in sentence:
                 word_vect.append(words[word])
                 i += 1
-                if i == T - 1:
-                    word_vect.append(0.0)
 
             result.append(word_vect)
 
