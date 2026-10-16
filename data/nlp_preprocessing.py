@@ -16,7 +16,13 @@ class Solution:
         #N = len(positive)
 
         words = {}
-        for a in positive:
+        both = positive + negative
+        for a in both:
+            sentence = a.split()
+            for word in sentence:
+                if word not in words:
+                    words[word] = 0.0
+        """for a in positive:
             sentence = a.split()
             for word in sentence:
                 if word not in words:
@@ -26,7 +32,7 @@ class Solution:
             sentence = b.split()
             for word in sentence:
                 if word not in words:
-                    words[word] = 0.0
+                    words[word] = 0.0"""
         
         words = dict(sorted(words.items()))
         i: float = 1
@@ -37,8 +43,17 @@ class Solution:
         #print(words)
 
         result = []
+        
 
-        for a in positive:
+        for a in both:
+            sentence = a.split()
+            i: float = 1
+            word_vect = []
+            for word in sentence:
+                word_vect.append(words[word])
+                i += 1
+            result.append(word_vect)
+        """for a in positive:
             sentence = a.split()
             i: float = 1
             word_vect = []
@@ -56,7 +71,7 @@ class Solution:
                 word_vect.append(words[word])
                 
 
-            result.append(word_vect)
+            result.append(word_vect)"""
 
         tensors = [torch.tensor(row, dtype=torch.float32) for row in result]
         result = nn.utils.rnn.pad_sequence(tensors, batch_first=True, padding_value=0)
